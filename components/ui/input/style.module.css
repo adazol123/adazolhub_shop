@@ -1,0 +1,21 @@
+._text__label > span {
+  @apply absolute top-1/2 -translate-y-1/2 text-base left-4  transition-all select-none text-theme-gray-500;
+}
+
+._text__input {
+  @apply absolute left-4 min-h-[46px] w-[calc(100%-1.5rem)] bg-transparent transition-all;
+}
+._text__input::placeholder {
+  @apply text-transparent h-0 overflow-hidden;
+}
+
+._text__input:not(:placeholder-shown),
+._text__input:is(:placeholder-shown):focus {
+  @apply min-h-fit bottom-2;
+}
+._text__input:is(:placeholder-shown):focus ~ span {
+  @apply text-[.5rem] -translate-y-[1.65rem];
+}
+._text__input:not(:placeholder-shown) ~ span {
+  @apply text-[.5rem] -translate-y-[1.65rem];
+}
