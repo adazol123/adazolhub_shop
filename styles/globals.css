@@ -1,9 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  @apply font-poppins scroll-smooth;
 }
 
 a {
@@ -23,4 +26,50 @@ a {
     color: white;
     background: black;
   }
+}
+
+h5 {
+  @apply text-lg font-bold text-emerald-500 animate-bounce;
+}
+
+h6 {
+  @apply text-neutral-500 animate-bounce;
+}
+
+input,
+textarea {
+  @apply outline-none filter-none;
+}
+
+/** RESET AUTO FILL TEXT INPUT DESIGN */
+input:-webkit-autofill,
+input:-webkit-autofill:is(:hover, :focus, :active) {
+  transition: background-color 5000000s ease-in-out 0s;
+  background-color: #fff;
+  color: black;
+}
+
+/** Scrollbar custom style */
+::-webkit-scrollbar {
+  @apply w-[2px] h-[2px];
+}
+::-webkit-scrollbar-track {
+  @apply bg-gray-300;
+}
+::-webkit-scrollbar-thumb {
+  @apply h-6 overflow-hidden rounded-full bg-gradient-to-b from-neutral-400 via-neutral-900 to-neutral-400;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply from-neutral-600 to-neutral-600;
+}
+
+/** Hide scrollbar for Chrome, Safari and Opera */
+.container-snap::-webkit-scrollbar {
+  display: none;
+}
+
+/** Hide scrollbar for IE, Edge and Firefox */
+.container-snap {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

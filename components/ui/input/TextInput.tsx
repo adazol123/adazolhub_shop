@@ -8,7 +8,8 @@ const TextInput = <T extends Partial<{
     onChange: React.ChangeEventHandler<HTMLInputElement>,
     value: string | number | readonly string[],
     className: string,
-    autoFocus: boolean
+    autoFocus: boolean,
+    autoComplete: string
 
 }>>(props: T) => {
     return (
@@ -22,6 +23,7 @@ const TextInput = <T extends Partial<{
                 value={props.value}
                 autoFocus={props.autoFocus}
                 {...props}
+                autoComplete={props.autoComplete || 'off'}
             />
             <span>{props.placeholder}</span>
         </label>

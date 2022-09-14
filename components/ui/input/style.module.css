@@ -1,12 +1,17 @@
+._text__label {
+  @apply relative border border-marine-300/30 rounded-md min-h-[48px] overflow-hidden min-w-[264px];
+  @apply transition-all;
+}
+
 ._text__label > span {
-  @apply absolute top-1/2 -translate-y-1/2 text-base left-4  transition-all select-none text-theme-gray-500;
+  @apply absolute text-base transition-all -translate-y-1/2 select-none top-1/2 left-4 text-theme-gray-500;
 }
 
 ._text__input {
-  @apply absolute left-4 min-h-[46px] w-[calc(100%-1.5rem)] bg-transparent transition-all;
+  @apply absolute left-4 min-h-[46px] w-[calc(100%-1.5rem)] bg-transparent transition-all text-theme-gray-700;
 }
 ._text__input::placeholder {
-  @apply text-transparent h-0 overflow-hidden;
+  @apply h-0 overflow-hidden text-transparent;
 }
 
 ._text__input:not(:placeholder-shown),
