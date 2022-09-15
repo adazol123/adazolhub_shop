@@ -9,6 +9,7 @@ import ButtonLink from '../../components/ui/buttons/ButtonLink'
 import Box from '../../components/ui/layouts/Box'
 import HorizontalDivider from '../../components/ui/layouts/HorizontalDivider'
 import style from '../../styles/login.module.css'
+import withoutAuthUser from '../../utils/lib/withoutAuthUser'
 
 type Props = {}
 
@@ -59,4 +60,5 @@ const Login = (props: Props) => {
   )
 }
 
-export default Login
+const EnhancedLogin = withoutAuthUser(Login)
+export default EnhancedLogin

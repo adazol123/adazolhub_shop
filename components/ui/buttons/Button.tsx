@@ -12,7 +12,7 @@ interface ButtonTypes {
     size: 'small' | 'medium' | 'large' | 'base';
     layout: 'expandded' | 'shrinked';
     type: "button" | "submit" | "reset";
-    onClick: MouseEventHandler;
+    onClick: React.MouseEventHandler<Element>;
 }
 /**
  * Button Standard (Theme)

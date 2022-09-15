@@ -11,19 +11,13 @@ let initialState: UserProps = {
   error: undefined,
 };
 export const fetchAuthUser = createAsyncThunk("auth/fetch_user", async () => {
-  return new Promise<UserType>((resolve) => {
+  return new Promise<UserType>((resolve, rejected) => {
     console.log("authenticating...");
     let unsubscribe = onAuthStateChanged(auth, (currentAuth) => {
       console.log(currentAuth);
       if (currentAuth) {
-        let {
-          displayName,
-          email,
-          emailVerified,
-          phoneNumber,
-          photoURL,
-          uid,
-        } = currentAuth;
+        let { displayName, email, emailVerified, phoneNumber, photoURL, uid } =
+          currentAuth;
 
         resolve({
           displayName,
@@ -34,6 +28,9 @@ export const fetchAuthUser = createAsyncThunk("auth/fetch_user", async () => {
           uid,
         });
 
+        unsubscribe();
+      } else {
+        rejected();
         unsubscribe();
       }
     });

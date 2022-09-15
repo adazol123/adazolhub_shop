@@ -6,11 +6,15 @@ import { useAppSelector } from '../../app/redux/hook';
 import RootLoader from '../../components/ui/loader/RootLoader';
 import { fetchAuthUser, selectCurrentAuth } from '../../features/user/user-auth.slice';
 import { useFetcher } from '../../hooks/useFetcher';
+import { UserType } from '../type/types';
 
 
-const withAuthUser = <T extends PropsWithChildren, F extends {
-    withFallbackURL?: string
-}>(WrappedComponent: ComponentType<T>, options: F) => {
+const withAuthUser = <T extends {
+    children: ReactNode | undefined,
+    user: UserType | null
+}, F extends {
+    withFallbackURL: string
+}>(WrappedComponent: ComponentType<T>, options?: F) => {
     let Comp = (props: T) => {
         const router = useRouter()
         console.log(options)
@@ -18,11 +22,11 @@ const withAuthUser = <T extends PropsWithChildren, F extends {
 
         React.useEffect(() => {
             console.log(status)
-            if (status === 'succeeded' && !state) router.push(options.withFallbackURL || '/login')
+            if (status === 'failed' && !state) router.push(options?.withFallbackURL || '/login')
+            if (error) console.log(error)
         }, [status])
 
-        if (error) return <div>{JSON.stringify(error, null, 2)}</div>
-        return status === 'loading' || status === 'idle' ? <RootLoader /> : <WrappedComponent {...props} />
+        return status === 'loading' || status === 'idle' ? <RootLoader /> : <WrappedComponent {...props} user={state} />
     }
     return Comp
 }

@@ -14,7 +14,7 @@ const ButtonLink = <T extends Partial<{
     disabled: boolean;
     title: string;
     type: "button" | "submit" | "reset";
-    onClick: React.MouseEventHandler<HTMLButtonElement>;
+    onClick: React.MouseEventHandler<Element>;
     icon: React.ReactElement;
     className: string
 
