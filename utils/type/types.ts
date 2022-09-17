@@ -9,13 +9,7 @@ export enum AsyncStatus {
 
 export type UserType = Pick<
   User,
-  | "displayName"
-  | "email"
-  | "emailVerified"
-  | "phoneNumber"
-  | "photoURL"
-  | "uid"
-  | "metadata"
+  "displayName" | "email" | "emailVerified" | "phoneNumber" | "photoURL" | "uid"
 >;
 
 export interface UserProps {

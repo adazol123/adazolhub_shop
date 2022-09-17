@@ -22,7 +22,6 @@ export const fetchAuthUser = createAsyncThunk("auth/fetch_user", async () => {
           emailVerified,
           phoneNumber,
           photoURL,
-          metadata,
           uid,
         } = currentAuth;
 
@@ -32,7 +31,6 @@ export const fetchAuthUser = createAsyncThunk("auth/fetch_user", async () => {
           emailVerified,
           phoneNumber,
           photoURL,
-          metadata,
           uid,
         });
 
@@ -46,10 +44,10 @@ const userAuthSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    useLogin: (state, action) => {
+    login: (state, action: PayloadAction<UserType>) => {
       state.user = action.payload;
     },
-    useLogout: (state) => {
+    logout: (state) => {
       state.user = null;
     },
   },
@@ -69,6 +67,6 @@ const userAuthSlice = createSlice({
   },
 });
 
-export const { useLogin, useLogout } = userAuthSlice.actions;
+export const { login, logout } = userAuthSlice.actions;
 export const selectCurrentAuth = (state: RootState) => state.auth.user;
 export default userAuthSlice.reducer;

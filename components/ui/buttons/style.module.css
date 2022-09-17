@@ -1,0 +1,100 @@
+/** LINK */
+._link {
+  @apply relative flex items-center gap-2 px-1 mx-auto font-bold origin-center rounded-none rounded-t w-fit text-teal-800/70;
+}
+._link:is(:hover):not(:disabled) {
+  @apply text-teal-800/70;
+}
+
+._link::after {
+  content: "";
+  @apply absolute inset-x-1/2 -bottom-1 w-0 h-[1px] bg-marine-500 rounded-full;
+  @apply transition-all duration-300 origin-center;
+}
+
+._link:is(:hover):not(:disabled)::after {
+  content: "";
+  @apply inset-x-0 w-1/2 translate-x-1/2;
+}
+._link:is(:hover):not(:disabled).__expanded::after {
+  @apply inset-x-0 w-full translate-x-0;
+}
+._link:is(:hover):not(:disabled).__shrinked::after {
+  @apply inset-x-0 w-1/2 translate-x-1/2;
+}
+._link:is(:active, :visited, :focus):not(:disabled) {
+  @apply text-marine-700;
+}
+._link:is(:active, :visited, :focus):not(:disabled)::after {
+  content: "";
+  @apply inset-x-0 w-full translate-x-0;
+}
+._link:is(:active, :visited, :focus):not(:disabled).__shrinked::after {
+  @apply inset-x-0 w-1/2 translate-x-1/2;
+}
+
+._link:disabled {
+  @apply text-theme-gray-500;
+}
+._link.__disabled::after {
+  @apply inset-x-0 w-full bottom-1/2 bg-theme-gray-700 bg-blend-difference;
+}
+
+._size__small {
+  @apply text-sm font-normal text-teal-800/50;
+}
+
+._link:is(:hover):not(:disabled) i {
+  @apply transition-transform -translate-x-2;
+}
+/** ------------------------------------- */
+
+/** BUTTON SOLID (THEME) */
+.button__primary {
+  @apply px-6 font-bold text-white rounded bg-marine-500;
+  @apply flex items-center justify-center transition-all whitespace-nowrap;
+}
+
+.button__primary:hover {
+  @apply drop-shadow-lg bg-marine-700;
+}
+
+.button__primary:is(:focus, :active):not(:disabled) {
+  @apply bg-transparent ring-1 ring-offset-0 ring-marine-300 text-marine-500 drop-shadow-none;
+}
+
+.button__primary:disabled {
+  @apply cursor-default bg-theme-gray-300 text-theme-gray-500 drop-shadow-none;
+}
+/** ------------------------------------- */
+
+/** BUTTON OUTLINED (THEME) */
+.button__outline {
+  @apply px-6 font-bold bg-transparent border rounded border-marine-500 text-marine-500;
+  @apply flex items-center justify-center transition-all drop-shadow-none;
+}
+
+.button__outline:is(:hover):not(:disabled) {
+  @apply bg-marine-500/5 text-marine-700 border-marine-300;
+}
+
+.button__outline:is(:focus, :active):not(:disabled) {
+  @apply text-marine-700 bg-marine-500/10 drop-shadow-lg;
+}
+
+.button__outline:disabled {
+  @apply bg-transparent cursor-default text-neutral-300 border-neutral-200 ring-transparent drop-shadow-none;
+}
+
+.button__tittle {
+  @apply inline-flex items-center gap-2;
+}
+
+/** ------------------------------------- */
+
+/** BUTTON LINK (THEME) */
+
+.button__dashed {
+  @apply px-4 py-2 text-xs bg-transparent border border-dashed rounded-md outline-none whitespace-nowrap border-neutral-300 text-neutral-400 hover:text-neutral-500 hover:border-neutral-400 focus:ring-1 ring-offset-2 focus:ring-emerald-500 focus:bg-emerald-300/40 h-fit;
+  @apply inline-flex items-center justify-center gap-4 mx-1;
+}
