@@ -9,7 +9,8 @@ const TextInput = <T extends Partial<{
     value: string | number | readonly string[],
     className: string,
     autoFocus: boolean,
-    autoComplete: string
+    autoComplete: string,
+    required: boolean
 
 }>>(props: T) => {
     return (
@@ -24,6 +25,7 @@ const TextInput = <T extends Partial<{
                 autoFocus={props.autoFocus}
                 {...props}
                 autoComplete={props.autoComplete || 'off'}
+                required={props.required}
             />
             <span>{props.placeholder}</span>
         </label>

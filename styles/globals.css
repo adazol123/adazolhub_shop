@@ -73,3 +73,11 @@ input:-webkit-autofill:is(:hover, :focus, :active) {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+section {
+  @apply container px-6 mx-auto;
+}
+
+svg {
+  @apply w-4 h-4;
+}
