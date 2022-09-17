@@ -9,6 +9,21 @@ body {
   @apply font-poppins scroll-smooth;
 }
 
+#root {
+  /* FONTS */
+  --font-size: 16px;
+  --font--xl: clamp(2rem, -0.22727269rem + 10.181818vw, 5.5rem);
+  --font--lg: clamp(1.5rem, 0.73636366rem + 3.490909vw, 2.7rem);
+  --font--md: clamp(1.35rem, 0.93636366rem + 1.890909vw, 2rem);
+  --font--base: clamp(1.18rem, 0.94454538rem + 1.076364vw, 1.55rem);
+  --font--sm: clamp(0.75rem, 0.59090903rem + 0.727273vw, 1rem);
+
+  /* SPACE */
+  --space--lg: clamp(32px, 8.8461525px + 6.615385vw, 75px);
+  --space--md: clamp(24px, 15.384617px + 2.461538vw, 40px);
+  --space--sm: clamp(12px, 6.615383px + 1.538462vw, 22px);
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -28,12 +43,31 @@ a {
   }
 }
 
+h1 {
+  @apply text-2xl font-semibold;
+}
+h2 {
+  @apply text-xl font-semibold;
+}
+h3 {
+  @apply text-lg font-semibold;
+}
+
+h4 {
+  @apply text-base font-semibold;
+}
 h5 {
-  @apply text-lg font-bold text-emerald-500 animate-bounce;
+  @apply text-tiny font-semibold;
 }
 
 h6 {
   @apply text-neutral-500 animate-bounce;
+}
+p {
+  @apply text-base opacity-75;
+}
+span {
+  @apply text-tiny;
 }
 
 input,
@@ -51,7 +85,7 @@ input:-webkit-autofill:is(:hover, :focus, :active) {
 
 /** Scrollbar custom style */
 ::-webkit-scrollbar {
-  @apply w-[2px] h-[2px];
+  @apply w-[2px] h-[0px];
 }
 ::-webkit-scrollbar-track {
   @apply bg-gray-300;
@@ -75,9 +109,29 @@ input:-webkit-autofill:is(:hover, :focus, :active) {
 }
 
 section {
-  @apply container px-6 mx-auto;
+  @apply container px-md mx-auto;
 }
 
 svg {
   @apply w-4 h-4;
+}
+
+@-webkit-keyframes slidein {
+  0% {
+    transform: translateZ(0);
+  }
+
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes slidein {
+  0% {
+    transform: translateZ(0);
+  }
+
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
 }

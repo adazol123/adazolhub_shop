@@ -1,4 +1,4 @@
-import { sendEmailVerification } from 'firebase/auth'
+import { deleteUser, sendEmailVerification } from 'firebase/auth'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -22,7 +22,7 @@ const Account: NextPage = () => {
     return (
         <section>
             Account
-            <h2>{user.displayName}</h2>
+            <h3>{user.displayName}</h3>
             <br />
             <span>{user.email}</span>
             <br />
@@ -30,16 +30,30 @@ const Account: NextPage = () => {
             <br />
             <span>{user.emailVerified.toString()}</span>
             <div>
-                <Button onClick={async () => {
-                    if (auth.currentUser) {
-                        await sendEmailVerification(auth.currentUser)
+                <Button
+                    disabled={user.emailVerified}
+                    onClick={async () => {
+                        if (auth.currentUser && auth.currentUser.emailVerified === false) {
 
-                    }
-                }}>Verify</Button>
+                            await sendEmailVerification(auth.currentUser)
+
+                        } else {
+                            console.log('email alread verified')
+                        }
+                    }}>Verify</Button>
                 <Button onClick={async () => {
                     await auth.signOut()
                     dispatch(logout())
                 }}>Logout</Button>
+                <Button onClick={async () => {
+                    if (auth.currentUser) {
+
+                        await deleteUser(auth.currentUser)
+                        dispatch(logout())
+                    }
+                }}
+                    className='bg-rose-600/10 text-rose-600'
+                >Delete Account</Button>
             </div>
         </section>
     )
