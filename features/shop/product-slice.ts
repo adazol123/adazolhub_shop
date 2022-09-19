@@ -10,7 +10,7 @@ const initialState: ShopProps = {
   error: undefined,
 };
 
-export const getProducts = createAsyncThunk("product/get", async () => {
+export const getProducts = createAsyncThunk("get/product", async () => {
   let products = await getDocs(docQuery(10));
   return products.docs.map((item) => item.data());
 });

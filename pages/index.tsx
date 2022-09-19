@@ -14,12 +14,13 @@ import { fetchAuthUser, logout, selectCurrentAuth } from '../features/user/user-
 import { useFetcher } from '../hooks/useFetcher'
 import styles from '../styles/Home.module.css'
 import withAuthUser from '../utils/lib/withAuthUser'
+import { ProductItemProps } from './../utils/type/types';
 
 const Home: NextPage = () => {
   let user = useAppSelector(selectCurrentAuth)
-  const { status, state, error } = useFetcher('shop', getProducts(), 'products')
+  const { result }= useFetcher('shop', getProducts(), 'products')
 
-  console.log(state)
+  console.log(result)
   const router = useRouter()
   return (
     <Fragment>
@@ -54,11 +55,11 @@ const Home: NextPage = () => {
         </div>
         <div>
           <h4>Products</h4>
-          <div className='flex flex-wrap w-full gap-4'>
-            {state.map(product => (
+          {result && <div className='flex flex-wrap w-full gap-4'>
+            {result.map(product => (
               <ProductCard key={product.product_id} tag='New' product={product} />
             ))}
-          </div>
+          </div>}
         </div>
       </section>
     </Fragment>
