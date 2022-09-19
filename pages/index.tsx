@@ -7,7 +7,9 @@ import { auth } from '../app/auth/firebase'
 import { useAppDispatch, useAppSelector } from '../app/redux/hook'
 import Button from '../components/ui/buttons/Button'
 import CategoryCard from '../components/ui/cards/Category'
+import ProductCard from '../components/ui/cards/product'
 import RootLoader from '../components/ui/loader/RootLoader'
+import { getProducts, selectAppProducts } from '../features/shop/product-slice'
 import { fetchAuthUser, logout, selectCurrentAuth } from '../features/user/user-auth.slice'
 import { useFetcher } from '../hooks/useFetcher'
 import styles from '../styles/Home.module.css'
@@ -15,7 +17,9 @@ import withAuthUser from '../utils/lib/withAuthUser'
 
 const Home: NextPage = () => {
   let user = useAppSelector(selectCurrentAuth)
-  console.log(user)
+  const { status, state, error } = useFetcher('shop', getProducts(), 'products')
+
+  console.log(state)
   const router = useRouter()
   return (
     <Fragment>
@@ -23,7 +27,7 @@ const Home: NextPage = () => {
         <title>Adazolhub | Shop</title>
 
       </Head>
-      <section className='space-y-md pt-md'>
+      <section className='space-y-md pt-md '>
         <div>
 
           <h2>Explore Brands</h2>
@@ -34,7 +38,7 @@ const Home: NextPage = () => {
           <div className='w-full overflow-hidden overflow-x-auto scroll-smooth'>
             <div className='flex gap-4 w-fit py-2'>
               <CategoryCard
-                img_source='https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop'
+                img_source='https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=50'
                 label='Men'
               />
               <CategoryCard
@@ -50,6 +54,11 @@ const Home: NextPage = () => {
         </div>
         <div>
           <h4>Products</h4>
+          <div className='flex flex-wrap w-full gap-4'>
+            {state.map(product => (
+              <ProductCard key={product.product_id} tag='New' product={product} />
+            ))}
+          </div>
         </div>
       </section>
     </Fragment>

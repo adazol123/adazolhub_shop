@@ -17,9 +17,17 @@ import { AsyncStatus, UserProps } from '../utils/type/types'
  * let { state, status, error } = useFetcher('auth', fetchAuthUser(), 'user')
  * 
  */
-export const useFetcher = <O extends keyof RootState, F, Z extends keyof Omit<RootState[keyof RootState], 'status' | 'error'>,>(store: O, fetcher: AsyncThunkAction<F, void, {}>, options: Z) => {
+export const useFetcher = <
+    O extends keyof RootState,
+    F,
+    Z extends keyof Omit<RootState[keyof RootState], 'status' | 'error'>>(
+        store: O,
+        fetcher: AsyncThunkAction<F, void, {}>,
+        options: Z) => {
     const data = useAppSelector(state => state[store])
     const dispatch = useAppDispatch()
+
+
     useEffect(() => {
         if (data.status && data.status === 'idle') {
             dispatch(fetcher)
@@ -30,6 +38,7 @@ export const useFetcher = <O extends keyof RootState, F, Z extends keyof Omit<Ro
     }, [data.status])
     // let result = options && state[options]
     // if (!options) return state
+
 
     return { state: data[options], status: data.status, error: data.error }
     // else return state
