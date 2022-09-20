@@ -1,4 +1,5 @@
 import { AsyncThunkAction } from '@reduxjs/toolkit'
+import { Omit } from '@reduxjs/toolkit/dist/tsHelpers'
 import React, { FC, Fragment, PropsWithChildren, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../app/redux/hook'
 import { RootState } from '../app/redux/store'
@@ -17,8 +18,10 @@ type SelectedType<X extends keyof RootState> = keyof Omit<RootState[X], 'status'
  * let { state, status, error } = useFetcher('auth', fetchAuthUser(), 'user')
  * 
  */
+type StoreType = keyof Omit<RootState, 'toggle'>
+
 export const useFetcher = <
-    S extends keyof RootState,
+    S extends StoreType,
     F,
     Z extends SelectedType<S>>(
         store: S,

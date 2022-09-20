@@ -14,6 +14,15 @@ export type UserType = Pick<
   "displayName" | "email" | "emailVerified" | "phoneNumber" | "photoURL" | "uid"
 >;
 
+export enum ToggleLike {
+  mobile = "mobile",
+}
+
+export type ToggleType = {
+  [S in keyof typeof ToggleLike]: boolean;
+  // [X: string]: boolean;
+};
+
 export interface UserProps {
   user: UserType | null;
   status: keyof typeof AsyncStatus;
