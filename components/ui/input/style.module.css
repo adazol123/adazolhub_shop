@@ -4,7 +4,7 @@
 }
 
 ._text__label > span {
-  @apply absolute text-base transition-all -translate-y-1/2 select-none top-1/2 left-4 text-theme-gray-500;
+  @apply absolute text-tiny transition-all -translate-y-1/2 select-none top-1/2 left-4 text-theme-gray-500;
 }
 
 ._text__input {
@@ -19,8 +19,8 @@
   @apply min-h-fit bottom-2;
 }
 ._text__input:is(:placeholder-shown):focus ~ span {
-  @apply text-[.5rem] -translate-y-[1.65rem];
+  @apply text-[.5rem] -translate-y-[1.1rem];
 }
 ._text__input:not(:placeholder-shown) ~ span {
-  @apply text-[.5rem] -translate-y-[1.65rem];
+  @apply text-[.5rem] -translate-y-[1.1rem];
 }

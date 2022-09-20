@@ -19,6 +19,11 @@ export interface UserProps {
   status: keyof typeof AsyncStatus;
   error: string | undefined;
 }
+export interface ShopProps {
+  products: ProductItemProps[];
+  status: keyof typeof AsyncStatus;
+  error: string | undefined;
+}
 
 export interface StepperValue {
   step: number;
@@ -37,4 +42,30 @@ export interface StepperProps<Z> {
     input: keyof StepperValue
   ) => (e: ChangeEvent<HTMLInputElement>) => void;
   values: Z;
+}
+
+export interface ProductItemProps {
+  name: string;
+  description: string;
+  owner: string;
+  product_id: string;
+  price: number;
+  metatags: {
+    brand: string;
+    category: string;
+    images: {
+      url: string;
+    }[];
+    sizes: string[];
+    variants: {
+      [color: string]: {
+        name: string;
+        quantity: number;
+        price: number;
+      };
+    };
+    others?: {
+      discount_price: number;
+    };
+  };
 }

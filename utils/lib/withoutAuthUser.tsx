@@ -16,7 +16,7 @@ const withoutAuthUser = <T extends {
     let Comp = (props: T) => {
         const router = useRouter()
         console.log(options)
-        const { status, state, error } = useFetcher('auth', fetchAuthUser(), 'user')
+        const { status, result: state, error } = useFetcher('auth', fetchAuthUser(), 'user')
 
         React.useEffect(() => {
             console.log(status)

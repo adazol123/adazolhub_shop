@@ -2,6 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ["firebasestorage.googleapis.com", "images.unsplash.com"],
+    formats: ['image/avif', 'image/webp'],
+  },
   env: {
     FIREBASE_API_KEY: 'AIzaSyDK8IZ-MNspBOOJ_S7k35HbDU2Q92HFiS8',
     FIREBASE_APP_ID: '1:636404332362:web:f4f7cc1bb6bbe66c3633b3',

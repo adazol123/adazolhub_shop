@@ -1,0 +1,20 @@
+._product {
+  @apply w-[calc(50%-0.5rem)] sm:w-[calc(33.33%-1rem)] lg:w-[calc(25%-1rem)]  rounded-xl overflow-hidden bg-white shadow;
+}
+
+._product__image {
+  @apply relative w-full h-44 md:h-64 bg-gradient-to-t from-black/70 rounded-xl mix-blend-darken;
+}
+._product_tag {
+  @apply absolute inset-0 right-2 bg-marine-700/70 h-fit w-fit px-4 py-1 rounded-br-xl text-white font-medium;
+}
+._product_tag {
+  @apply drop-shadow-lg shadow-lg;
+}
+._product__footer {
+  @apply p-3 space-y-2;
+}
+
+._product__footer h4 {
+  @apply text-marine-900 font-semibold text-md;
+}

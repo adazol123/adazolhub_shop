@@ -1,0 +1,17 @@
+._feature {
+  @apply relative w-56 h-64 rounded-xl overflow-hidden bg-gradient-to-t from-neutral-900/80;
+}
+
+._feature__footer {
+  @apply absolute  bottom-0 p-4 text-white;
+}
+
+._feature__tittle {
+  @apply text-tiny;
+}
+._feature__price {
+  @apply text-lg;
+}
+._feature__button {
+  @apply bg-white text-neutral-700 px-4 py-2 rounded-md;
+}

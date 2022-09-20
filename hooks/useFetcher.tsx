@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../app/redux/hook'
 import { RootState } from '../app/redux/store'
 import { AsyncStatus, UserProps } from '../utils/type/types'
 
-
+type SelectedType<X extends keyof RootState> = keyof Omit<RootState[X], 'status' | 'error'>
 /**
  * Async Redux Fetcher
  * 
@@ -17,7 +17,13 @@ import { AsyncStatus, UserProps } from '../utils/type/types'
  * let { state, status, error } = useFetcher('auth', fetchAuthUser(), 'user')
  * 
  */
-export const useFetcher = <O extends keyof RootState, F, Z extends keyof Omit<RootState[keyof RootState], 'status' | 'error'>,>(store: O, fetcher: AsyncThunkAction<F, void, {}>, options: Z) => {
+export const useFetcher = <
+    S extends keyof RootState,
+    F,
+    Z extends SelectedType<S>>(
+        store: S,
+        fetcher: AsyncThunkAction<F, void, {}>,
+        options: Z) => {
     const data = useAppSelector(state => state[store])
     const dispatch = useAppDispatch()
     useEffect(() => {
@@ -31,6 +37,6 @@ export const useFetcher = <O extends keyof RootState, F, Z extends keyof Omit<Ro
     // let result = options && state[options]
     // if (!options) return state
 
-    return { state: data[options], status: data.status, error: data.error }
+    return { result: data[options], status: data.status, error: data.error }
     // else return state
 }
