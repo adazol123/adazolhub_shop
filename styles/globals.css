@@ -22,6 +22,23 @@ body {
   --space--lg: clamp(32px, 8.8461525px + 6.615385vw, 75px);
   --space--md: clamp(24px, 15.384617px + 2.461538vw, 40px);
   --space--sm: clamp(12px, 6.615383px + 1.538462vw, 22px);
+
+  --nav-height: 56px;
+  --padding-container: 24px;
+
+  --color-marine-900: #1b3e39;
+  --color-marine-700: #2e6962;
+  --color-marine-500: #4d9c93;
+  --color-marine-300: #52b6aa;
+  --color-marine-100: #dff7f5;
+
+  --color-neutral-700: #575e5c;
+  --color-neutral-500: #b3bcb9;
+  --color-neutral-300: #d3e0dd;
+  --color-neutral-100: #e9f2f0;
+
+  --color-theme-dark: #1a1f1e;
+  --color-theme-light: #fafffe;
 }
 
 a {
