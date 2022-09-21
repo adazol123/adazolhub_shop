@@ -2,6 +2,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Fragment, ReactNode } from 'react'
 import { useScrollDisable } from '../../../../hooks/useScrollDisable';
 import style from './style.module.css'
+import { AnimatePresence, motion } from 'framer-motion';
+
 type ExtendedOptions = {
     children: ReactNode;
     icon: ReactNode;
@@ -19,25 +21,46 @@ const DefaultModal = (props: Props) => {
     return (
         <Fragment>
             <Backdrop toggle={props.toggle} toggleHandler={props.toggleHandler} />
-            {props.toggle && <div className={style._default__wrapper}>
-                <nav>
-                    {props.title && (
-                        <div className="inline-flex items-center gap-2">
-                            {props.icon && <span>{props.icon}</span>}
-                            <span>{props.title}</span>
-                        </div>
-                    )}
-                </nav>
-                <div className={style._default__content}>
-                    <div className="flex w-full justify-end mb-3">
+            <AnimatePresence mode='wait'>
 
-                        <button className='p-2'
-                            onClick={props.toggleHandler}
-                        ><XMarkIcon /></button>
+                {props.toggle && <motion.div
+                    initial={{ y: '100%' }}
+                    animate={{ y: 0 }}
+                    exit={{ y: '100%' }}
+                    transition={{
+                        bounce: 0.2,
+                        duration: 0.3
+                    }}
+                    drag='y'
+                    dragConstraints={{
+                        bottom: 0,
+                        top: 0
+                    }}
+                    dragElastic={{
+                        bottom: 0.4,
+                        top: 0
+                    }}
+                    
+                    className={style._default__wrapper}>
+                    <nav>
+                        {props.title && (
+                            <div className="inline-flex items-center gap-2">
+                                {props.icon && <span>{props.icon}</span>}
+                                <span>{props.title}</span>
+                            </div>
+                        )}
+                    </nav>
+                    <div className={style._default__content}>
+                        <div className="flex w-full justify-end">
+
+                            <button className='p-2'
+                                onClick={props.toggleHandler}
+                            ><XMarkIcon /></button>
+                        </div>
+                        {props.children}
                     </div>
-                    {props.children}
-                </div>
-            </div>}
+                </motion.div>}
+            </AnimatePresence>
         </Fragment>
     )
 }

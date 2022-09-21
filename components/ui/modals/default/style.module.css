@@ -21,7 +21,7 @@
 }
 
 ._default__content {
-  @apply relative inset-x-0 h-fit w-full px-6 py-4 rounded-t-xl shadow-md bg-white/90  text-neutral-500 z-40;
+  @apply relative inset-x-0 h-fit w-full px-6 py-4 rounded-t-xl shadow-md bg-white  text-neutral-500 z-40;
 }
 
 @media (min-width: 640px) {
