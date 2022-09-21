@@ -4,17 +4,26 @@ import Image from 'next/image'
 import React, { Fragment, ReactNode } from 'react'
 import { ProductItemProps } from '../../../../utils/type/types'
 import style from './style.module.css'
+
+type OptionalProps = {
+    children: ReactNode,
+    tag: string,
+    onImageClick: () => void,
+    onDetailsClick: () => void
+}
+
 type Props<T> = {
     product: T,
-    children?: ReactNode,
-    tag?: string
-}
+
+} & Partial<OptionalProps>
 
 const ProductCard = <T extends ProductItemProps>(props: Props<T>) => {
     return (
         <Fragment>
             <div className={style._product}>
-                <div className={style._product__header}>
+                <div className={style._product__header}
+                    onClick={props.onImageClick}
+                >
                     <figure className={style._product__image}>
                         <Image
                             src={props.product.metatags.images[0].url}
@@ -29,7 +38,9 @@ const ProductCard = <T extends ProductItemProps>(props: Props<T>) => {
                         <ShoppingBagIcon className='w-6 h-6 absolute bottom-2 right-2 text-white' />
                     </figure>
                 </div>
-                <div className={style._product__footer}>
+                <div className={style._product__footer}
+                    onClick={props.onDetailsClick}
+                >
                     <p className='line-clamp-2 text-theme-gray-700 opacity-75 min-h-[42px]'>{props.product.name}</p>
                     <h4>₱ {props.product.price.toFixed(2)}</h4>
                 </div>

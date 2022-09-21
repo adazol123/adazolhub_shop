@@ -14,8 +14,10 @@ import InformationCard from '../components/ui/cards/information'
 import ProductCard from '../components/ui/cards/product'
 import Bleed from '../components/ui/layouts/Bleed'
 import RootLoader from '../components/ui/loader/RootLoader'
+import DefaultModal from '../components/ui/modals/default'
 import { getProducts, selectAppProducts } from '../features/shop/product-slice'
 import ProductGridList from '../features/shop/ProductGridList'
+import { toggleState } from '../features/toggle/toggle.slice'
 import { fetchAuthUser, logout, selectCurrentAuth } from '../features/user/user-auth.slice'
 import { useFetcher } from '../hooks/useFetcher'
 import styles from '../styles/Home.module.css'
@@ -26,7 +28,6 @@ const Home: NextPage = () => {
   let user = useAppSelector(selectCurrentAuth)
   const { result } = useFetcher('shop', getProducts(), 'products')
 
-  console.log(result)
   const router = useRouter()
   return (
     <Fragment>
@@ -60,7 +61,6 @@ const Home: NextPage = () => {
           </div>
         </div>
         <div>
-          <h4>Products</h4>
           <ProductGridList />
         </div>
 
@@ -114,6 +114,7 @@ const Home: NextPage = () => {
       <Bleed className='bg-neutral-800 text-white'>
         <Footer />
       </Bleed>
+
     </Fragment>
   )
 }

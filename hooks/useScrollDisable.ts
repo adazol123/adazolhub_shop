@@ -8,7 +8,7 @@ export function useScrollDisable(isOpen: boolean) {
       root_html!.style.paddingRight = "";
     } else {
       root_html!.style.overflow = "hidden";
-      root_html!.style.paddingRight = "2px";
+      root_html!.style.paddingRight = "1px";
     }
 
     return () => {

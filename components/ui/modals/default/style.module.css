@@ -1,0 +1,35 @@
+._backdrop {
+  @apply fixed inset-0 z-[39] w-full h-full cursor-default bg-black/5  backdrop-blur-[2px];
+}
+
+._default__wrapper {
+  @apply fixed m-auto inset-x-0 z-40 min-h-fit w-full bottom-0 md:max-w-fit  md:top-1/2 md:-translate-y-1/2;
+}
+._default__active {
+  @apply visible h-auto scale-90 opacity-100;
+}
+
+._default__wrapper nav {
+  @apply relative right-0 w-full mx-4 mt-4 h-7;
+}
+
+._default__wrapper nav button {
+  @apply absolute right-0 p-1 rounded-full;
+}
+._default__wrapper svg {
+  @apply w-5 h-5 text-gray-500;
+}
+
+._default__content {
+  @apply relative inset-x-0 h-fit w-full px-6 py-4 rounded-t-xl shadow-md bg-white  text-neutral-500 z-40;
+}
+
+@media (min-width: 640px) {
+  ._default__content {
+    @apply w-fit rounded-xl;
+  }
+
+  ._default__wrapper {
+    @apply max-w-fit  top-1/2 -translate-y-1/2;
+  }
+}
