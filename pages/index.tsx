@@ -36,6 +36,9 @@ const Home: NextPage = () => {
 
       </Head>
       <section className='space-y-md pt-md min-h-screen'>
+        <button onClick={() => {
+          router.push('/cart')
+        }}>Cart</button>
         <div>
 
           <h2>Explore Brands</h2>

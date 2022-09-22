@@ -24,12 +24,12 @@ const DefaultModal = (props: Props) => {
             <AnimatePresence mode='wait'>
 
                 {props.toggle && <motion.div
-                    initial={{ y: '100%' }}
-                    animate={{ y: 0 }}
-                    exit={{ y: '100%' }}
+                    initial={{ y: '100%', opacity: 0.5 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: '100%', opacity: 0.5 }}
                     transition={{
                         bounce: 0.2,
-                        duration: 0.3
+                        duration: 0.4
                     }}
                     drag='y'
                     dragConstraints={{
@@ -40,7 +40,7 @@ const DefaultModal = (props: Props) => {
                         bottom: 0.4,
                         top: 0
                     }}
-                    
+
                     className={style._default__wrapper}>
                     <nav>
                         {props.title && (
@@ -53,7 +53,7 @@ const DefaultModal = (props: Props) => {
                     <div className={style._default__content}>
                         <div className="flex w-full justify-end">
 
-                            <button className='p-2'
+                            <button className='p-2 -mr-4 -mt-2 rounded-full hover:bg-theme-gray-100'
                                 onClick={props.toggleHandler}
                             ><XMarkIcon /></button>
                         </div>
