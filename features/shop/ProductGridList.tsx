@@ -8,6 +8,7 @@ import DefaultModal from '../../components/ui/modals/default'
 import ProductSkeleton from '../../components/ui/skeleton/products'
 import { useFetcher } from '../../hooks/useFetcher'
 import { ProductItemProps } from '../../utils/type/types'
+import { addToCart, decrementQuantity, incrementQuantity, removeFromCart } from '../cart/cart.slice'
 import { toggleState } from '../toggle/toggle.slice'
 import { getProducts } from './product-slice'
 
@@ -17,7 +18,10 @@ const ProductGridList = (props: Props) => {
     const { result, status } = useFetcher('shop', getProducts(), 'products')
     const { mobile } = useAppSelector(state => state.toggle.toggle)
     let [selectedItem, setSelectedItem] = useState<ProductItemProps>()
+    const carts = useAppSelector(state => state.cart.carts)
+    let cart = carts.find(cart => cart.product_id === selectedItem?.product_id)
     const dispatch = useAppDispatch()
+    let [quantity, setQuantity] = useState(1)
     return (
         <div>
             <h4>Products</h4>
@@ -35,7 +39,7 @@ const ProductGridList = (props: Props) => {
                 ))}
                 {selectedItem &&
                     <DefaultModal toggle={mobile} toggleHandler={() => dispatch(toggleState('mobile'))}  >
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-10">
                             <div className="w-full flex gap-3">
                                 <div
                                     className='relative  w-[calc(50%-0.5rem)] h-44 rounded-lg overflow-hidden'
@@ -50,8 +54,8 @@ const ProductGridList = (props: Props) => {
                                 <div className='w-[calc(50%)] flex flex-col justify-between'>
                                     <div>
 
-                                        <h3 className='line-clamp-3'>{selectedItem.name.slice(0, 40)}</h3>
-                                        <h4>₱ {selectedItem.price.toFixed(2)}</h4>
+                                        <h3 className='line-clamp-3 text-md'>{selectedItem.name.slice(0, 40)}</h3>
+                                        <h4 className='opacity-75'>₱ {selectedItem.price.toFixed(2)}</h4>
                                     </div>
                                     <Button styled='outline' size='medium' className='rounded-full'>Details</Button>
                                 </div>
@@ -61,18 +65,20 @@ const ProductGridList = (props: Props) => {
                                 <div>
                                     <span className='mr-1 font-semibold'>Color</span>
                                     {/* <span className='opacity-75'>Blue</span> */}
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-4 m-2">
 
                                         {Object.values(selectedItem.metatags.variants).map((variant, _index) => {
-                                            let color = ` rounded-full p-2`
+                                            let color = `rounded-full p-2 `
                                             return (
-                                                <div key={_index} className={`${color} w-10 h-10 opacity-50`}
+                                                <button key={_index}
+                                                    title={variant.name}
+                                                    className={`${color} w-6 h-6 opacity-50 hover:opacity-90 ring-2 ring-neutral-200 ring-offset-2`}
                                                     style={{
                                                         backgroundColor: variant.name
                                                     }}
                                                 >
 
-                                                </div>
+                                                </button>
                                             )
                                         })}
                                     </div>
@@ -80,7 +86,7 @@ const ProductGridList = (props: Props) => {
                                 <div>
                                     <span className='mr-1 font-semibold'>Size</span>
                                     {/* <span className='opacity-75'>Blue</span> */}
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 my-1">
 
                                         {selectedItem.metatags.sizes.map((size, _index) => {
                                             let shortenSize = () => {
@@ -101,24 +107,69 @@ const ProductGridList = (props: Props) => {
                                                 }
                                             }
                                             return (
-                                                <div key={_index} className='p-2 rounded-full border min-w-[4ch] flex justify-center items-center'>
-                                                    <span className='text-base font-semibold'>{shortenSize()}</span>
-                                                </div>
+                                                <button key={_index}
+                                                    title={size}
+                                                    className='p-2 rounded-full border min-w-[34px] flex justify-center items-center hover:bg-theme-dark hover:text-theme-light'>
+                                                    <span className='text-tiny font-semibold'>{shortenSize()}</span>
+                                                </button>
                                             )
                                         })}
                                     </div>
                                 </div>
                             </div>
-                            <div className='w-full flex justify-between'>
-                                <div />
-                                <div className="flex gap-4">
-                                    <div className='flex gap-3 items-center'>
-                                        <button className='p-3 border rounded-full'><MinusIcon /></button>
-                                        <h3 className='text-marine-700'>2</h3>
-                                        <button className='p-3 border rounded-full'><PlusIcon /></button>
-                                    </div>
-                                    <Button className='rounded-full'>Add to cart</Button>
+                            <div className=' flex justify-between relative bg-gradient-to-br from-white to-marine-100 py-3 px-6 -mx-6  w-[calc(100%+3rem)] rounded-b-xl'>
+
+                                <div className='flex gap-3 items-center'>
+                                    <button className='p-3 border rounded-full disabled:opacity-50 disabled:bg-theme-gray-100'
+                                        disabled={quantity < 2}
+                                        onClick={() => {
+                                            if (cart) {
+
+                                                dispatch(decrementQuantity(selectedItem?.product_id))
+                                            } else {
+                                                if (quantity > 1) {
+                                                    setQuantity(prev => prev -= 1)
+                                                }
+                                            }
+                                        }}
+                                    ><MinusIcon /></button>
+                                    <h3 className='text-marine-700 min-w-[2ch] text-center'>{cart ? cart.quantity : quantity}</h3>
+                                    <button className='p-3 border rounded-full disabled:opacity-50 disabled:bg-theme-gray-100'
+                                        disabled={quantity >= 20}
+                                        onClick={() => {
+                                            if (cart) {
+                                                dispatch(incrementQuantity(selectedItem?.product_id))
+                                            } else {
+                                                setQuantity(prev => prev += 1)
+                                            }
+                                        }}
+                                    ><PlusIcon /></button>
                                 </div>
+                                {!cart ? <Button className='rounded-full'
+                                    onClick={() => {
+                                        if (selectedItem) {
+                                            dispatch(addToCart({
+                                                product_id: selectedItem?.product_id,
+                                                color: 'black',
+                                                name: selectedItem?.name,
+                                                price: selectedItem?.price,
+                                                quantity: quantity,
+                                                size: 'small',
+                                                product: selectedItem
+                                            }))
+                                            dispatch(toggleState('mobile'))
+                                        }
+                                    }}
+                                >Add to Cart</Button> :
+                                    <Button className='rounded-full'
+
+                                        onClick={() => {
+                                            setQuantity(1)
+                                            dispatch(removeFromCart(cart?.product_id))
+                                            dispatch(toggleState('mobile'))
+                                        }}
+                                    >Remove from Cart</Button>
+                                }
                             </div>
                         </div>
                     </DefaultModal>}

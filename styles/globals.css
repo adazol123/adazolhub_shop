@@ -1,14 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-  @apply font-poppins scroll-smooth bg-white text-black/80;
-}
-
 #root {
   /* FONTS */
   --font-size: 16px;
@@ -39,6 +28,17 @@ body {
 
   --color-theme-dark: #1a1f1e;
   --color-theme-light: #fafffe;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  @apply font-poppins scroll-smooth bg-white text-black/80;
 }
 
 a {

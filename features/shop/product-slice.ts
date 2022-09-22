@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { getDocs } from "firebase/firestore";
-import { docQuery } from "../../app/auth/firebase";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { db, docQuery } from "../../app/auth/firebase";
 import type { RootState } from "../../app/redux/store";
 import type { ProductItemProps, ShopProps } from "../../utils/type/types";
 
@@ -18,7 +18,28 @@ export const getProducts = createAsyncThunk("get/product", async () => {
 const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    addProduct: (state, action: PayloadAction<ProductItemProps>) => {
+      let duplicates = state.products.filter(
+        (product) => product.product_id === action.payload.product_id
+      );
+
+      if (!duplicates) {
+        let uid = crypto.randomUUID();
+        const productRef = doc(db, "products", uid);
+        setDoc(productRef, action.payload, { merge: true })
+          .then((_) => {
+            console.log("success!");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        console.log("product item is duplicated");
+      }
+    },
+  },
+
   extraReducers(builder) {
     builder
       .addCase(getProducts.pending, (state, action) => {

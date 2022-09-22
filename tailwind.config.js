@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./components/**/**/*.{js,ts,jsx,tsx}",
     "./features/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -44,8 +45,8 @@ module.exports = {
           300: '#52B6AA',
           100: '#DFF7F5',
         },
-        'theme-dark': 'var(--color-theme-dark)',
-        'theme-light': 'var(--color-theme-light)',
+        'theme-dark': '#1A1F1E',
+        'theme-light': '#FAFFFE',
       },
       keyframes: {
         marquee: {
