@@ -13,9 +13,9 @@ const CartCard = (props: Props) => {
     <div className='my-6 flex flex-col gap-2'>
       {carts.map(cart => (
         <div key={cart.product_id}
-          className='flex gap-2  bg-gradient-to-br from-white to-marine-100/50 overflow-hidden rounded-md'
+          className='flex gap-2  bg-gradient-to-br from-white to-marine-100/50 overflow-hidden rounded-lg'
         >
-          <div className='w-24 h-[150px] relative rounded-md overflow-hidden'>
+          <div className='w-24 h-[110px] p-2 relative rounded-l-lg overflow-hidden'>
             <Image
               src={cart.product.metatags.images[0].url}
               alt={cart.name.slice(0, 20)}
@@ -24,9 +24,9 @@ const CartCard = (props: Props) => {
             />
           </div>
           <div className='flex-1 py-2 pr-2 flex flex-col gap-4 h-full justify-between'>
-            <div className='min-h-[84px]'>
+            <div className='min-h-fit'>
 
-              <p className='line-clamp-3'>{cart.name}</p>
+              <p className='line-clamp-1'>{cart.name}</p>
               <div className='flex gap-2 mt-2'>
                 <span >Size: <strong>{cart.size}</strong></span>
                 <span>Color: <strong>{cart.color}</strong></span>

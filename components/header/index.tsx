@@ -80,17 +80,18 @@ const HeaderNav = (props: Props) => {
 
 const Footer = () => {
     const user = useAppSelector(selectCurrentAuth)
+    const router = useRouter()
     return (
         <div className='min-h-nav-height w-full'>
             {user ?
-                <ButtonLink className='flex gap-1'>
-                    <UserCircleIcon className='w-5 h-5' />
-                    <div>
+                <ButtonLink className='flex gap-1 w-full' onClick={() => router.push('/account')}>
+                    <UserCircleIcon className='w-8 h-8' />
+                    <div className='flex flex-col gap-1 items-start'>
                         <span>{user.displayName}</span>
                         <span className='text-[0.5rem] opacity-50'>{user.email}</span>
                     </div>
                 </ButtonLink>
-                : <Button className='w-full'> Getting Started </Button>}
+                : <Button className='w-full' onClick={() => router.push('/login')}> Getting Started </Button>}
         </div>
     )
 }

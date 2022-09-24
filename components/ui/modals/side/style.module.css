@@ -2,10 +2,10 @@
   @apply fixed inset-0 z-[39] w-full h-full cursor-default bg-black/5  backdrop-blur-[2px];
 }
 ._side__wrapper {
-  @apply fixed m-auto z-40 min-h-screen w-full top-0 md:right-0 md:max-w-fit;
+  @apply fixed m-auto z-40 h-full w-full top-0 md:right-0 md:max-w-fit;
 }
 ._side {
-  @apply relative inset-x-0 h-fit w-full px-4 md:px-6 right-0 pt-0  md:rounded-l-xl shadow-md  z-40 bg-white/50 md:bg-white;
+  @apply relative inset-x-0 h-screen w-full px-4 md:px-6 right-0 pt-0  md:rounded-l-xl shadow-md  z-40 bg-white/50 md:bg-white flex flex-col justify-between;
 }
 
 ._side nav {

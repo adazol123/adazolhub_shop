@@ -40,7 +40,7 @@ const SideModal = (props: Props) => {
                     </nav>}
                     <div
                         className={[
-                            "min-h-[calc(100vh-58px)] px-2 ",
+                            " px-2 ",
                             props.scrollable ? style._scrollable : "",
                         ].join(" ")}
                     >
