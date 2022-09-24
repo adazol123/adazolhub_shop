@@ -1,66 +1,74 @@
 import React, { Fragment, ReactNode } from 'react'
 import style from './style.module.css'
 import { ArrowLeftIcon, ArrowSmallRightIcon } from '@heroicons/react/24/outline'
-type ModalProps = {
-    title: string | null;
+
+type ExtendedOptions = {
+    children: ReactNode;
     icon: ReactNode;
+    title: string;
     scrollable: boolean;
     enableFooter: boolean;
     footer: ReactNode;
+    withHeader: boolean
 }
 
 type Props = {
     state: boolean;
     toggleStateHandler: () => void;
-    children: ReactNode;
 
-}
+} & Partial<ExtendedOptions>
 
-const SideModal = (props: Props & Partial<ModalProps>) => {
+
+const SideModal = (props: Props) => {
     return (
         <Fragment>
-            {props.state && (
-                <button
-                    className={style.backdrop}
-                    tabIndex={-1}
-                    onClick={props.toggleStateHandler}
-                />
-            )}
-
-            <div
-                className={[
-                    style.modal_side,
-                    props.state ? style.modal_side_active : "",
-                ].join(" ")}
-            >
-                <nav>
-                    <div className="inline-flex gap-2 items-center">
-                        <button tabIndex={props.state ? 1 : -1} onClick={props.toggleStateHandler}>
-                            <ArrowLeftIcon />
-                        </button>
-
-                        <span> {props.title ? props.title : "Title here"}</span>
-                    </div>
-                </nav>
+            <Backdrop state={props.state} toggleStateHandler={props.toggleStateHandler} />
+            <div className={style._side__wrapper}>
                 <div
                     className={[
-                        "min-h-[calc(100vh-(54px*5.8))] px-2 -mx-2",
-                        props.scrollable ? style.scrollable : "",
+                        style._side,
+                        props.state ? style._side__active : "",
                     ].join(" ")}
                 >
-                    {props.children}
-                </div>
-                {props.enableFooter && (
+                    {props.withHeader && <nav>
+                        <div className="inline-flex gap-2 items-center">
+                            <button tabIndex={props.state ? 1 : -1} onClick={props.toggleStateHandler}>
+                                <ArrowLeftIcon />
+                            </button>
+                            <span> {props.title ? props.title : "Title here"}</span>
+                        </div>
+                    </nav>}
                     <div
                         className={[
-                            style.footer,
-                            props.state ? style.modal_side_footer_delay : "",
+                            "min-h-[calc(100vh-58px)] px-2 ",
+                            props.scrollable ? style._scrollable : "",
                         ].join(" ")}
                     >
-                        {props.footer}
+                        {props.children}
                     </div>
-                )}
+                    {props.enableFooter && (
+                        <div
+                            className={[
+                                style._footer,
+                                props.state ? style.modal_side_footer_delay : "",
+                            ].join(" ")}
+                        >
+                            {props.footer}
+                        </div>
+                    )}
+                </div>
             </div>
+        </Fragment>
+    )
+}
+
+const Backdrop = (props: Props) => {
+    return (
+        <Fragment>
+            {props.state && <button
+                onClick={props.toggleStateHandler}
+                className={style._backdrop}
+            />}
         </Fragment>
     )
 }

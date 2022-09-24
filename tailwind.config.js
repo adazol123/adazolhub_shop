@@ -30,6 +30,9 @@ module.exports = {
         'md': 'clamp(24px, 15.384617px + 2.461538vw, 40px)',
         'lg': 'clamp(32px, 8.8461525px + 6.615385vw, 75px)',
       },
+      minHeight: {
+        'nav-height': '56px'
+      },
       colors: {
         'theme-gray': {
           700: '#575E5C',

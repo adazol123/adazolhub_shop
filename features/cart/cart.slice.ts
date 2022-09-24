@@ -65,6 +65,17 @@ const cartSlice = createSlice({
         }
       }
     },
+
+    updatePrice: state => {
+      let totalAmount = 0;
+      let totalQuantity = 0;
+      state.carts.forEach(item => {
+        state.total += item.price * item.quantity
+      })
+
+      totalQuantity = state.carts.reduce( (acc, current) => acc + current.quantity, 0)
+
+    }
   },
 });
 

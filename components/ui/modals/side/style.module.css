@@ -1,0 +1,17 @@
+._backdrop {
+  @apply fixed inset-0 z-[39] w-full h-full cursor-default bg-black/5  backdrop-blur-[2px];
+}
+._side__wrapper {
+  @apply fixed m-auto z-40 min-h-screen w-full top-0 md:right-0 md:max-w-fit;
+}
+._side {
+  @apply relative inset-x-0 h-fit w-full px-4 md:px-6 right-0 pt-0  md:rounded-l-xl shadow-md  z-40 bg-white/50 md:bg-white;
+}
+
+._side nav {
+  @apply inline-flex -mx-2 md:mx-2 items-center justify-between py-4 text-neutral-600 min-h-nav-height;
+}
+
+._footer {
+  @apply relative bottom-0 w-full;
+}
