@@ -44,7 +44,11 @@ const CartCard = (props: Props) => {
                 <span>{cart.quantity}</span>
                 <button className='p-2' onClick={() => dispatch(incrementQuantity(cart.product_id))}><PlusIcon /></button>
               </div>
-              <h4 className='whitespace-nowrap text-marine-700'>₱ {cart.price.toFixed(2)}</h4>
+              <div className='flex flex-col items-end'>
+                <h4 className='whitespace-nowrap text-marine-700'>₱ {(cart.price * cart.quantity).toFixed(2)}</h4>
+                <span className='text-[0.55rem] opacity-50'>₱ {cart.price.toFixed(2)} X {cart.quantity}</span>
+              </div>
+
             </div>
           </div>
 
