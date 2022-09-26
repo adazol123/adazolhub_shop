@@ -1,6 +1,7 @@
 import React, { Fragment, ReactNode } from 'react'
 import style from './style.module.css'
 import { ArrowLeftIcon, ArrowSmallRightIcon } from '@heroicons/react/24/outline'
+import { AnimatePresence, motion } from 'framer-motion';
 
 type ExtendedOptions = {
     children: ReactNode;
@@ -24,39 +25,51 @@ const SideModal = (props: Props) => {
         <Fragment>
             <Backdrop state={props.state} toggleStateHandler={props.toggleStateHandler} />
             <div className={style._side__wrapper}>
-                <div
-                    className={[
-                        style._side,
-                        props.state ? style._side__active : "",
-                    ].join(" ")}
-                >
-                    {props.withHeader && <nav>
-                        <div className="inline-flex gap-2 items-center">
-                            <button tabIndex={props.state ? 1 : -1} onClick={props.toggleStateHandler}>
-                                <ArrowLeftIcon />
-                            </button>
-                            <span> {props.title ? props.title : "Title here"}</span>
-                        </div>
-                    </nav>}
-                    <div
+                <AnimatePresence mode='wait'>
+                    <motion.div
+                        initial={{ y: '100%', opacity: 0.5 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: '100%', opacity: 0.5 }}
+                        transition={{
+                            bounce: 0.2,
+                            duration: 0.3
+                        }}
                         className={[
-                            " px-2 ",
-                            props.scrollable ? style._scrollable : "",
+                            style._side,
+                            props.state ? style._side__active : "",
                         ].join(" ")}
                     >
-                        {props.children}
-                    </div>
-                    {props.enableFooter && (
+                        {props.withHeader && <nav>
+                            <div className="inline-flex gap-2 items-center">
+                                <button tabIndex={props.state ? 1 : -1} onClick={props.toggleStateHandler}>
+                                    <ArrowLeftIcon />
+                                </button>
+                                <span> {props.title ? props.title : "Title here"}</span>
+                            </div>
+                        </nav>}
                         <div
                             className={[
-                                style._footer,
-                                props.state ? style.modal_side_footer_delay : "",
+                                " px-2 ",
+                                props.scrollable ? style._scrollable : "",
                             ].join(" ")}
                         >
-                            {props.footer}
+                            {props.children}
                         </div>
-                    )}
-                </div>
+                        <div>
+                            {props.enableFooter && (
+                                <div
+                                    className={[
+                                        style._footer,
+                                        props.state ? style.modal_side_footer_delay : "",
+                                    ].join(" ")}
+                                >
+                                    {props.footer}
+                                </div>
+                            )}
+                            <Footer state={props.state} />
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
             </div>
         </Fragment>
     )
@@ -73,17 +86,18 @@ const Backdrop = (props: Props) => {
     )
 }
 
-function Footer(state: boolean) {
+function Footer({ state }: { state: boolean }) {
     return (
         <footer
             className={[
-                style.footer,
+                style._footer,
                 state ? style.modal_side_footer_delay : "",
+                'text-center opacity-50'
             ].join(" ")}
         >
-            <span>© Copyright 2022 | </span>
+
             <a href="http://adazolhub.com" target={"_blank"} rel={"noreferrer"}>
-                <span>ADAZOLHUB.</span>
+                <span>Copyright 2022 © Adazolhub.com | All right reserved.</span>
                 <ArrowSmallRightIcon className="w-3 h-3 -rotate-45 stroke-gray-300 " />
             </a>
         </footer>

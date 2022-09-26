@@ -67,10 +67,10 @@ const HeaderNav = (props: Props) => {
 
                     {/** Content */}
                     <div className="gap-3 px-0 grid md:-ml-3 md:flex grid-cols-2 md:flex-col w-full">
-                        <button className='bg-white p-3 rounded-md row-span-3 md:row-span-1 flex items-start'>Home</button>
-                        <button className='bg-white p-3 rounded-md row-span-2 md:row-span-1 flex items-start'>Category</button>
-                        <button className='bg-white p-3 rounded-md flex items-start'>Support</button>
-                        <button className='bg-white p-3 rounded-md col-span-2 flex items-start'>About</button>
+                        <button className='text-tiny min-h-[58px] shadow bg-white p-3 rounded-md row-span-4 md:row-span-1 flex items-end'>Home</button>
+                        <button className='text-tiny min-h-[58px] shadow bg-white p-3 rounded-md row-span-2 md:row-span-1 flex items-end'>Category</button>
+                        <button className='text-tiny min-h-[58px] shadow bg-white p-3 rounded-md flex items-end'>Support</button>
+                        <button className='text-tiny min-h-[58px] shadow bg-white p-3 rounded-md flex items-end'>About</button>
                     </div>
                 </SideModal>}
         </Fragment>
@@ -81,17 +81,24 @@ const HeaderNav = (props: Props) => {
 const Footer = () => {
     const user = useAppSelector(selectCurrentAuth)
     const router = useRouter()
+    const dispatch = useAppDispatch()
     return (
         <div className='min-h-nav-height w-full'>
             {user ?
-                <ButtonLink className='flex gap-1 w-full' onClick={() => router.push('/account')}>
+                <ButtonLink className='flex gap-1 w-full bg-white' onClick={() => {
+                    router.push('/account')
+                    dispatch(toggleState('side_nav'))
+                }}>
                     <UserCircleIcon className='w-8 h-8' />
                     <div className='flex flex-col gap-1 items-start'>
                         <span>{user.displayName}</span>
                         <span className='text-[0.5rem] opacity-50'>{user.email}</span>
                     </div>
                 </ButtonLink>
-                : <Button className='w-full' onClick={() => router.push('/login')}> Getting Started </Button>}
+                : <Button className='w-full' onClick={() => {
+                    router.push('/login')
+                    dispatch(toggleState('side_nav'))
+                }}> Getting Started </Button>}
         </div>
     )
 }

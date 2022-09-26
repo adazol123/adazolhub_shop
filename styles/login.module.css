@@ -1,3 +1,3 @@
 ._section {
-  @apply bg-white sm:bg-gradient-to-br from-theme-light to-marine-100;
+  @apply absolute w-full inset-x-0 bg-white grid place-content-center min-h-full;
 }

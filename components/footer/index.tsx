@@ -7,10 +7,10 @@ const Footer = (props: Props) => {
     return (
         <div className='container mx-auto grid gap-6 px-2 md:px-6'>
 
-            <div className='flex flex-col gap-1 self-start opacity-50'>
-                <button className='text-start py-1 px-2'>Shop</button>
-                <button className='text-start py-1 px-2'>Categories</button>
-                <button className='text-start py-1 px-2'>Legal</button>
+            <div className='flex flex-col gap-3 self-start opacity-50'>
+                <button className='text-tiny text-start py-1 px-2'>Shop</button>
+                <button className='text-tiny text-start py-1 px-2'>Categories</button>
+                <button className='text-tiny text-start py-1 px-2'>Legal</button>
             </div>
 
             <div>

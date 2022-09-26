@@ -51,7 +51,7 @@
 
 /** BUTTON SOLID (THEME) */
 .button__primary {
-  @apply px-6 font-bold text-white rounded bg-marine-500;
+  @apply px-6 font-bold text-white rounded-full bg-marine-500;
   @apply flex items-center justify-center transition-all whitespace-nowrap;
 }
 
@@ -60,7 +60,7 @@
 }
 
 .button__primary:is(:focus, :active):not(:disabled) {
-  @apply bg-transparent ring-1 ring-offset-0 ring-marine-300 text-marine-500 drop-shadow-none;
+  @apply bg-marine-900 ring-1 ring-offset-0 ring-marine-300 text-white drop-shadow-none;
 }
 
 .button__primary:disabled {
@@ -70,16 +70,16 @@
 
 /** BUTTON OUTLINED (THEME) */
 .button__outline {
-  @apply px-6 font-bold bg-transparent border rounded border-marine-500 text-marine-500;
+  @apply px-6 font-bold bg-transparent border rounded-full border-marine-500 text-marine-500;
   @apply flex items-center justify-center transition-all drop-shadow-none;
 }
 
 .button__outline:is(:hover):not(:disabled) {
-  @apply bg-marine-500/5 text-marine-700 border-marine-300;
+  @apply bg-marine-500/20 text-marine-700 border-marine-300;
 }
 
 .button__outline:is(:focus, :active):not(:disabled) {
-  @apply text-marine-700 bg-marine-500/10 drop-shadow-lg;
+  @apply text-marine-700/80 bg-marine-500/10 drop-shadow-lg;
 }
 
 .button__outline:disabled {

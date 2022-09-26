@@ -20,27 +20,40 @@ const ProductGridList = (props: Props) => {
 
 
     const dispatch = useAppDispatch()
+    if (status === 'idle' || status === 'loading') {
+        return <div>
+            <h4>Products</h4>
+            <ProductSkeleton />
+        </div>
+    }
 
     return (
-        <div>
-            <h4>Products</h4>
-            {status === 'idle' || status === 'loading' ? <ProductSkeleton /> :
-                <div className='flex flex-wrap w-full gap-4 py-3 '>
-                    {result.map(product => (
-                        <ProductCard
-                            key={product.product_id}
-                            tag='New'
-                            product={product}
-                            onImageClick={() => {
-                                dispatch(toggleState('mobile'))
-                                setSelectedItem(product)
-                            }}
-                        />
-                    ))}
+        <Fragment>
+            {result.length > 0
+                ? <div>
+                    <h4>Products</h4>
+                    <div className='flex flex-wrap w-full gap-4 py-3 '>
+                        {result.map(product => (
+                            <ProductCard
+                                key={product.product_id}
+                                tag='New'
+                                product={product}
+                                onImageClick={() => {
+                                    dispatch(toggleState('mobile'))
+                                    setSelectedItem(product)
+                                }}
+                            />
+                        ))}
+                    </div>
+                    <ProductModal selectedItem={selectedItem} />
+                </div >
+                : <div className='grid place-content-center place-items-center min-h-[50vh] '>
+                    <h4>No Product found.</h4>
 
-                </div>}
-            <ProductModal selectedItem={selectedItem} />
-        </div >
+                    <span className='max-w-[30ch] text-center mt-1 opacity-50'>Please check your internet connection or Contact the support.</span>
+                </div>
+            }
+        </Fragment>
     )
 }
 
