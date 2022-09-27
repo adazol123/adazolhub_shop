@@ -5,12 +5,12 @@ type Props = {}
 
 const Footer = (props: Props) => {
     return (
-        <div className='container mx-auto grid gap-6 px-2 md:px-6'>
+        <div className='container grid gap-6 px-2 mx-auto md:grid-cols-3 md:px-6'>
 
-            <div className='flex flex-col gap-3 self-start opacity-50'>
-                <button className='text-tiny text-start py-1 px-2'>Shop</button>
-                <button className='text-tiny text-start py-1 px-2'>Categories</button>
-                <button className='text-tiny text-start py-1 px-2'>Legal</button>
+            <div className='flex flex-col self-start gap-3 opacity-50'>
+                <button className='px-2 py-1 text-tiny text-start'>Shop</button>
+                <button className='px-2 py-1 text-tiny text-start'>Categories</button>
+                <button className='px-2 py-1 text-tiny text-start'>Legal</button>
             </div>
 
             <div>
@@ -19,8 +19,8 @@ const Footer = (props: Props) => {
                 </div>
             </div>
 
-            <a href="" className='mx-auto w-fit font-thin opacity-75'>
-                <span className='text-tiny tracking-widest'>Copyright 2022 © Adazolhub.com | All right reserved.</span>
+            <a href="" className='mx-auto font-thin opacity-75 w-fit'>
+                <span className='tracking-widest text-tiny'>Copyright 2022 © Adazolhub.com | All right reserved.</span>
             </a>
         </div>
     )

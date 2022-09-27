@@ -8,7 +8,7 @@ import DefaultModal from '../../components/ui/modals/default'
 import ProductSkeleton from '../../components/ui/skeleton/products'
 import { useFetcher } from '../../hooks/useFetcher'
 import { ProductItemProps } from '../../utils/type/types'
-import { addToCart, decrementQuantity, incrementQuantity, removeFromCart } from '../cart/cart.slice'
+import { addToCart, decrementQuantity, incrementQuantity, removeFromCart, updatePrice } from '../cart/cart.slice'
 import { toggleState } from '../toggle/toggle.slice'
 import { getProducts } from './product-slice'
 
@@ -70,7 +70,7 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                     <div className="flex flex-col gap-4">
                         <div className="flex w-full gap-3">
                             <div
-                                className='relative  w-[calc(50%-0.5rem)] h-44 rounded-lg overflow-hidden'
+                                className='relative  w-[calc(50%-0.5rem)] h-32 rounded-lg overflow-hidden'
                             >
                                 <Image
                                     src={selectedItem.metatags.images[0].url}
@@ -82,7 +82,7 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                             <div className='w-[calc(50%)] flex flex-col justify-between'>
                                 <div>
 
-                                    <h3 className='line-clamp-3 text-md'>{selectedItem.name.slice(0, 40)}</h3>
+                                    <h3 className='line-clamp-2 text-md'>{selectedItem.name.slice(0, 40)}</h3>
                                     <h4 className='opacity-75'>₱ {selectedItem.price.toFixed(2)}</h4>
                                 </div>
                                 <Button styled='outline' size='medium' className='rounded-full'>Details</Button>
@@ -154,9 +154,11 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                                         if (cart) {
 
                                             dispatch(decrementQuantity(selectedItem?.product_id))
+
                                         } else {
                                             if (quantity > 1) {
                                                 setQuantity(prev => prev -= 1)
+
                                             }
                                         }
                                     }}
@@ -167,8 +169,10 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                                     onClick={() => {
                                         if (cart) {
                                             dispatch(incrementQuantity(selectedItem?.product_id))
+
                                         } else {
                                             setQuantity(prev => prev += 1)
+
                                         }
                                     }}
                                 ><PlusIcon /></button>
@@ -187,6 +191,7 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                                         }))
                                         setQuantity(1)
                                         dispatch(toggleState('mobile'))
+                                        dispatch(updatePrice())
 
                                     }
                                 }}
@@ -197,6 +202,7 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                                         setQuantity(1)
                                         dispatch(removeFromCart(cart?.product_id))
                                         dispatch(toggleState('mobile'))
+
 
                                     }}
                                 >Remove from Cart</Button>

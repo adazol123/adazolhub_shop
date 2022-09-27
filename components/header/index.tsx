@@ -21,19 +21,18 @@ const HeaderNav = (props: Props) => {
     useScrollDisable(toggle)
     return (
         <Fragment>
-            <header className='sticky top-0 z-30 bg-gradient-to-tr from-white to-marine-100 shadow-sm'>
-                <div className='container mx-auto px-6 flex justify-between items-center min-h-nav-height 
-            '>
-                    <span>Adazolhub | Shop</span>
+            <header className='sticky top-0 z-30 shadow-sm bg-gradient-to-tr from-white to-marine-100'>
+                <div className='container flex items-center justify-between px-6 mx-auto min-h-nav-height '>
+                    <span onClick={() => router.replace('/')}>Adazolhub | Shop</span>
                     <div className='flex gap-2'>
 
-                        {quantityIndicator > 0 && <button className='p-2 bg-white rounded-full relative'
+                        {quantityIndicator > 0 && <button className='relative p-2 bg-white rounded-full'
                             onClick={() => router.push('/cart')}
                         >
                             <ShoppingCartIcon className='w-5 h-5' />
                             {quantityIndicator > 0 && <span className='p-1 rounded-full text-white bg-rose-600 text-[0.55rem] min-w-[4ch] absolute -top-0 -right-1 flex justify-center items-center leading-[10px] border-2 border-marine-100' >{quantityIndicator}</span>}
                         </button>}
-                        <button className='p-2 bg-white rounded-full relative'
+                        <button className='relative p-2 bg-white rounded-full'
                             onClick={() => dispatch(toggleState('side_nav'))}
                         ><Squares2X2Icon className='w-5 h-5' /></button>
                     </div>
@@ -46,18 +45,17 @@ const HeaderNav = (props: Props) => {
                     enableFooter
                     footer={<Footer />}
                 >
-                    <div className='container mx-auto px-0 flex gap-10 justify-between items-center min-h-nav-height 
-            '>
+                    <div className='container flex items-center justify-between gap-10 px-0 mx-auto min-h-nav-height '>
                         <span>Adazolhub | Shop</span>
                         <div className='flex gap-2'>
 
-                            {quantityIndicator > 0 && <button className='p-2 bg-white rounded-full relative'
+                            {quantityIndicator > 0 && <button className='relative p-2 bg-white rounded-full'
                                 onClick={() => router.push('/cart')}
                             >
                                 <ShoppingCartIcon className='w-5 h-5' />
                                 {quantityIndicator > 0 && <span className='p-1 rounded-full text-white bg-rose-600 text-[0.55rem] min-w-[4ch] absolute -top-0 -right-1 flex justify-center items-center leading-[10px] border-2 border-marine-100' >{quantityIndicator}</span>}
                             </button>}
-                            <button className='p-2 bg-white rounded-full relative'
+                            <button className='relative p-2 bg-white rounded-full'
                                 onClick={() => dispatch(toggleState('side_nav'))}
                             >
                                 {toggle ? <XMarkIcon className='w-5 h-5' /> : <Squares2X2Icon className='w-5 h-5' />}
@@ -66,7 +64,7 @@ const HeaderNav = (props: Props) => {
                     </div>
 
                     {/** Content */}
-                    <div className="gap-3 px-0 grid md:-ml-3 md:flex grid-cols-2 md:flex-col w-full">
+                    <div className="grid w-full grid-cols-2 gap-3 px-0 md:-ml-3 md:flex md:flex-col">
                         <button className='text-tiny min-h-[58px] shadow bg-white p-3 rounded-md row-span-4 md:row-span-1 flex items-end'>Home</button>
                         <button className='text-tiny min-h-[58px] shadow bg-white p-3 rounded-md row-span-2 md:row-span-1 flex items-end'>Category</button>
                         <button className='text-tiny min-h-[58px] shadow bg-white p-3 rounded-md flex items-end'>Support</button>
@@ -83,14 +81,14 @@ const Footer = () => {
     const router = useRouter()
     const dispatch = useAppDispatch()
     return (
-        <div className='min-h-nav-height w-full'>
+        <div className='w-full min-h-nav-height'>
             {user ?
-                <ButtonLink className='flex gap-1 w-full bg-white' onClick={() => {
+                <ButtonLink className='flex w-full gap-1 bg-white' onClick={() => {
                     router.push('/account')
                     dispatch(toggleState('side_nav'))
                 }}>
                     <UserCircleIcon className='w-8 h-8' />
-                    <div className='flex flex-col gap-1 items-start'>
+                    <div className='flex flex-col items-start gap-1'>
                         <span>{user.displayName}</span>
                         <span className='text-[0.5rem] opacity-50'>{user.email}</span>
                     </div>
