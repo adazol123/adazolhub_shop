@@ -16,6 +16,7 @@ export type UserType = Pick<
 
 export enum ToggleLike {
   mobile = "mobile",
+  side_nav = "side_nav",
 }
 
 export type ToggleType = {

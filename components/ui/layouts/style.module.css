@@ -1,5 +1,5 @@
 ._box {
-  @apply flex flex-col gap-6 bg-white px-6 min-h-screen sm:min-h-[540px] min-w-[388px] justify-between items-center pt-16 pb-12 sm:pb-6 rounded-md sm:drop-shadow-md transition-all transform-gpu;
+  @apply absolute sm:relative mx-auto left-1/2 -translate-x-1/2 flex flex-col gap-6 bg-white px-6 h-full sm:min-h-full min-w-[312px] justify-between items-center pt-12 sm:pt-6 pb-8 sm:pb-6 rounded-xl sm:drop-shadow-xl transition-all transform-gpu;
 }
 ._center {
   @apply mx-auto min-h-screen grid place-content-center md:min-w-[500px] gap-6;

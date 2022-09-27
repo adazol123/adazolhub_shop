@@ -7,6 +7,7 @@ const initialState: {
 } = {
   toggle: {
     mobile: false,
+    side_nav: false,
   },
 };
 

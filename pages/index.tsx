@@ -7,6 +7,7 @@ import { Fragment, useEffect } from 'react'
 import { auth } from '../app/auth/firebase'
 import { useAppDispatch, useAppSelector } from '../app/redux/hook'
 import Footer from '../components/footer'
+import HeaderNav from '../components/header'
 import Button from '../components/ui/buttons/Button'
 import CategoryCard from '../components/ui/cards/Category'
 import FeatureCard from '../components/ui/cards/feature'
@@ -35,10 +36,8 @@ const Home: NextPage = () => {
         <title>Adazolhub | Shop</title>
 
       </Head>
+      <HeaderNav />
       <section className='space-y-md pt-md min-h-screen'>
-        <button onClick={() => {
-          router.push('/cart')
-        }}>Cart</button>
         <div>
 
           <h2>Explore Brands</h2>

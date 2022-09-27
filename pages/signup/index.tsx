@@ -1,4 +1,4 @@
-import { EnvelopeIcon } from '@heroicons/react/24/outline'
+import { ChevronLeftIcon, EnvelopeIcon, ArrowLeftIcon } from '@heroicons/react/24/outline'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
@@ -23,15 +23,21 @@ const Signup: NextPage = () => {
             <div className='mx-auto min-h-screen grid place-content-center md:min-w-[500px] gap-6'>
 
                 <Box>
-                    <div className='relative w-full h-16 px-5 pointer-events-none'>
-                        <Image src={'/svg/adazolhub_shop_logo_desktop_colored.svg'} alt='adazolhub_shop_logo' layout='fill' />
-                    </div>
-                    <div className='flex flex-col gap-4'>
-                        <Button onClick={() => router.push('/signup/with-email')} icon={<EnvelopeIcon />} type='button' > Continue with Email</Button>
-                        <HorizontalDivider />
-                        <Button styled='outline' >Continue with Google</Button>
-                        <div>
-                            <p className='max-w-[200px] text-[0.65rem] text-theme-gray-500'>By clicking continue, you agree to our <strong className='underline text-theme-gray-700/70 underline-offset-2'>Terms and Conditions</strong> and <strong className='underline text-theme-gray-700/70 underline-offset-2'>Privacy Policy</strong></p>
+                    <button className='-left-3 w-fit relative flex gap-1 px-3 py-1 self-start rounded-full text-tiny text-theme-gray-700' onClick={() => router.back()}>
+                        <ArrowLeftIcon />
+
+                    </button>
+                    <div>
+                        <div className='relative w-full h-16 px-5 pointer-events-none'>
+                            <Image src={'/svg/adazolhub_shop_logo_desktop_colored.svg'} alt='adazolhub_shop_logo' layout='fill' />
+                        </div>
+                        <div className='flex flex-col gap-4 mt-10'>
+                            <Button onClick={() => router.push('/signup/with-email')} icon={<EnvelopeIcon />} type='button' > Continue with Email</Button>
+                            <HorizontalDivider />
+                            <Button className='text-theme-gray-700 border-theme-gray-500' styled='outline' >Continue with Google</Button>
+                            <div>
+                                <p className='max-w-[36ch] text-[0.75rem] text-theme-gray-500 opacity-50'>By clicking continue, you agree to our <strong className='underline  underline-offset-2 opacity-100'>Terms and Conditions</strong> and <strong className='underline  underline-offset-2 opacity-100'>Privacy Policy.</strong></p>
+                            </div>
                         </div>
                     </div>
                     {/*
@@ -40,7 +46,7 @@ const Signup: NextPage = () => {
                             <TextInput type='password' placeholder='Password' />
                         </form> */}
                     <div>
-                        <ButtonLink size='small' onClick={() => router.replace('/login')} >
+                        <ButtonLink size='small' className='text-theme-gray-700' onClick={() => router.replace('/login')} >
                             <>
                                 Already have an account?
                                 <strong>Login</strong>
