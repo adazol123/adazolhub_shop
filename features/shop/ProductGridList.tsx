@@ -1,5 +1,6 @@
 import { MinusIcon, PlusIcon, PlusSmallIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import React, { Fragment, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../app/redux/hook'
 import Button from '../../components/ui/buttons/Button'
@@ -63,6 +64,7 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
     let cart = carts.find(cart => cart.product_id === selectedItem?.product_id)
     let [quantity, setQuantity] = useState(1)
     const dispatch = useAppDispatch()
+    const router = useRouter()
     return (
         <Fragment>
             {selectedItem &&
@@ -85,7 +87,9 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                                     <h3 className='line-clamp-2 text-md'>{selectedItem.name.slice(0, 40)}</h3>
                                     <h4 className='opacity-75'>₱ {selectedItem.price.toFixed(2)}</h4>
                                 </div>
-                                <Button styled='outline' size='medium' className='rounded-full'>Details</Button>
+                                <Button styled='outline' size='medium' className='rounded-full'
+                                    onClick={() => router.push(`/product/${selectedItem.product_id}`)}
+                                >Details</Button>
                             </div>
                         </div>
                         <div className='flex flex-col gap-2'>
@@ -146,8 +150,8 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                             </div>
 
                         </div>
-                        <div className=' flex gap-2 justify-between relative bg-gradient-to-br from-white to-marine-100 py-3 px-6 -mx-6  w-[calc(100%+3rem)] rounded-b-xl'>
-                            <div className='flex items-center gap-1'>
+                        <div className={`flex gap-2 relative bg-gradient-to-br from-white to-marine-100 py-3 px-6 -mx-6  w-[calc(100%+3rem)] rounded-b-xl ${cart ? 'justify-end' : ' justify-between'}`}>
+                            <div className={`flex items-center gap-1 ${cart && 'hidden'}`}>
                                 <button className='p-2 border rounded-full disabled:opacity-50 disabled:bg-theme-gray-100'
                                     disabled={quantity < 2}
                                     onClick={() => {
@@ -173,10 +177,14 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                                 ><PlusIcon /></button>
                             </div>
                             <div className='flex gap-2'>
-                                <div className='flex flex-col items-end'>
+                                {!cart ? <div className='flex flex-col items-end'>
                                     <span className='opacity-50'>Estimated Price</span>
                                     <p><strong>₱ {(selectedItem.price * quantity).toFixed(2)}</strong></p>
-                                </div>
+                                </div> :
+                                    <div className='flex flex-col items-end'>
+                                        <span className='opacity-50'>Current Price</span>
+                                        <p><strong>₱ {(selectedItem.price).toFixed(2)} x {cart.quantity}</strong></p>
+                                    </div>}
 
 
                                 {!cart ? <Button className='rounded-full'
