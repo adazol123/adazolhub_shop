@@ -9,6 +9,7 @@ import Bleed from './../../components/ui/layouts/Bleed';
 import Footer from './../../components/footer/index';
 import HeaderNav from '../../components/header'
 import CartCardFooter from '../../components/ui/cards/cart/footer'
+import HeaderNavOverlay from '../../components/header/Overlay'
 
 type Props = {}
 
@@ -21,9 +22,9 @@ const Cart = (props: Props) => {
     return (
         <Fragment>
             <Head>
-                <title>Login - Adazolhub | Shop</title>
+                <title>Cart - Adazolhub | Shop</title>
             </Head>
-            <HeaderNav />
+            <HeaderNavOverlay title='Cart' />
             <section className='min-h-[calc(100vh-58px)]'>
 
                 {carts.length ?

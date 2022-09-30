@@ -1,37 +1,32 @@
-import React, { Fragment } from 'react'
-import { QueueListIcon, ShoppingCartIcon, Squares2X2Icon, UserCircleIcon, UserIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { useAppDispatch, useAppSelector } from '../../app/redux/hook'
-import Button from '../ui/buttons/Button'
-import { selectCurrentAuth } from '../../features/user/user-auth.slice'
+import { ArrowLeftIcon, ShoppingCartIcon, Squares2X2Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
-import SideModal from '../ui/modals/side'
+import React, { Fragment } from 'react'
+import { NavFooter } from '.'
+import { useAppDispatch, useAppSelector } from '../../app/redux/hook'
 import { toggleState } from '../../features/toggle/toggle.slice'
 import { useScrollDisable } from '../../hooks/useScrollDisable'
-import CategoryCard from '../ui/cards/Category'
-import ButtonLink from '../ui/buttons/ButtonLink'
-type Props = {}
+import SideModal from '../ui/modals/side'
 
-const HeaderNav = (props: Props) => {
+type Props = {
+    title?: string
+}
+
+const HeaderNavOverlay = (props: Props) => {
     const router = useRouter()
-    const cart = useAppSelector(store => store.cart.carts)
 
-    const quantityIndicator = cart.reduce((acc, { quantity: current }) => acc + current, 0)
     let toggle = useAppSelector(state => state.toggle.toggle.side_nav)
     const dispatch = useAppDispatch()
     useScrollDisable(toggle)
+
     return (
         <Fragment>
             <header className='sticky top-0 z-30 shadow-sm bg-gradient-to-tr from-white to-marine-100'>
                 <div className='container flex items-center justify-between px-6 mx-auto min-h-nav-height '>
-                    <span onClick={() => router.replace('/')}>Adazolhub | Shop</span>
+                    <button className='p-2 rounded-full' onClick={() => router.back()}><ArrowLeftIcon /></button>
+                    {props.title &&
+                        <h4>{props.title.toLocaleUpperCase()}</h4>
+                    }
                     <div className='flex gap-2'>
-
-                        {quantityIndicator > 0 && <button className='relative p-2 bg-white rounded-full'
-                            onClick={() => router.push('/cart')}
-                        >
-                            <ShoppingCartIcon className='w-5 h-5' />
-                            {quantityIndicator > 0 && <span className='p-1 rounded-full text-white bg-rose-600 text-[0.55rem] min-w-[4ch] absolute -top-0 -right-1 flex justify-center items-center leading-[10px] border-2 border-marine-100' >{quantityIndicator}</span>}
-                        </button>}
                         <button className='relative p-2 bg-white rounded-full'
                             onClick={() => dispatch(toggleState('side_nav'))}
                         ><Squares2X2Icon className='w-5 h-5' /></button>
@@ -70,29 +65,4 @@ const HeaderNav = (props: Props) => {
     )
 }
 
-
-export const NavFooter = () => {
-    const user = useAppSelector(selectCurrentAuth)
-    const router = useRouter()
-    const dispatch = useAppDispatch()
-    return (
-        <div className='w-full min-h-nav-height'>
-            {user ?
-                <ButtonLink className='flex w-full gap-1 bg-white' onClick={() => {
-                    router.push('/account')
-                    dispatch(toggleState('side_nav'))
-                }}>
-                    <UserCircleIcon className='w-8 h-8' />
-                    <div className='flex flex-col items-start gap-1'>
-                        <span>{user.displayName}</span>
-                        <span className='text-[0.5rem] opacity-50'>{user.email}</span>
-                    </div>
-                </ButtonLink>
-                : <Button className='w-full' onClick={() => {
-                    router.push('/login')
-                    dispatch(toggleState('side_nav'))
-                }}> Getting Started </Button>}
-        </div>
-    )
-}
-export default HeaderNav
+export default HeaderNavOverlay

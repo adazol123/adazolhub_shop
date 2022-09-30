@@ -114,7 +114,7 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                             <div>
                                 <span className='mr-1 font-semibold'>Size</span>
                                 {/* <span className='opacity-75'>Blue</span> */}
-                                <div className="flex gap-2 my-1">
+                                <div className="flex gap-2 mt-1 mb-2">
 
                                     {selectedItem.metatags.sizes.map((size, _index) => {
                                         let shortenSize = () => {
@@ -144,69 +144,72 @@ const ProductModal = ({ selectedItem }: { selectedItem: ProductItemProps | undef
                                     })}
                                 </div>
                             </div>
-                        </div>
-                        <div className=' flex justify-between relative bg-gradient-to-br from-white to-marine-100 py-3 px-6 -mx-6  w-[calc(100%+3rem)] rounded-b-xl'>
 
-                            <div className='flex items-center gap-3'>
-                                <button className='p-3 border rounded-full disabled:opacity-50 disabled:bg-theme-gray-100'
+                        </div>
+                        <div className=' flex gap-2 justify-between relative bg-gradient-to-br from-white to-marine-100 py-3 px-6 -mx-6  w-[calc(100%+3rem)] rounded-b-xl'>
+                            <div className='flex items-center gap-1'>
+                                <button className='p-2 border rounded-full disabled:opacity-50 disabled:bg-theme-gray-100'
                                     disabled={quantity < 2}
                                     onClick={() => {
                                         if (cart) {
-
                                             dispatch(decrementQuantity(selectedItem?.product_id))
-
                                         } else {
                                             if (quantity > 1) {
                                                 setQuantity(prev => prev -= 1)
-
                                             }
                                         }
                                     }}
                                 ><MinusIcon /></button>
                                 <h3 className='text-marine-700 min-w-[2ch] text-center'>{cart ? cart.quantity : quantity}</h3>
-                                <button className='p-3 border rounded-full disabled:opacity-50 disabled:bg-theme-gray-100'
+                                <button className='p-2 border rounded-full disabled:opacity-50 disabled:bg-theme-gray-100'
                                     disabled={quantity >= 20}
                                     onClick={() => {
                                         if (cart) {
                                             dispatch(incrementQuantity(selectedItem?.product_id))
-
                                         } else {
                                             setQuantity(prev => prev += 1)
-
                                         }
                                     }}
                                 ><PlusIcon /></button>
                             </div>
-                            {!cart ? <Button className='rounded-full'
-                                onClick={() => {
-                                    if (selectedItem) {
-                                        dispatch(addToCart({
-                                            product_id: selectedItem?.product_id,
-                                            color: 'black',
-                                            name: selectedItem?.name,
-                                            price: selectedItem?.price,
-                                            quantity: quantity,
-                                            size: 'small',
-                                            product: selectedItem
-                                        }))
-                                        setQuantity(1)
-                                        dispatch(toggleState('mobile'))
-                                        dispatch(updatePrice())
+                            <div className='flex gap-2'>
+                                <div className='flex flex-col items-end'>
+                                    <span className='opacity-50'>Estimated Price</span>
+                                    <p><strong>₱ {(selectedItem.price * quantity).toFixed(2)}</strong></p>
+                                </div>
 
-                                    }
-                                }}
-                            >Add to Cart</Button> :
-                                <Button className='rounded-full'
 
+                                {!cart ? <Button className='rounded-full'
                                     onClick={() => {
-                                        setQuantity(1)
-                                        dispatch(removeFromCart(cart?.product_id))
-                                        dispatch(toggleState('mobile'))
+                                        if (selectedItem) {
+                                            dispatch(addToCart({
+                                                product_id: selectedItem?.product_id,
+                                                color: 'black',
+                                                name: selectedItem?.name,
+                                                price: selectedItem?.price,
+                                                quantity: quantity,
+                                                size: 'small',
+                                                product: selectedItem
+                                            }))
+                                            setQuantity(1)
+                                            dispatch(toggleState('mobile'))
+                                            dispatch(updatePrice())
 
-
+                                        }
                                     }}
-                                >Remove from Cart</Button>
-                            }
+                                >Add to Cart</Button> :
+                                    <Button className='rounded-full'
+
+                                        onClick={() => {
+                                            setQuantity(1)
+                                            dispatch(removeFromCart(cart?.product_id))
+                                            dispatch(toggleState('mobile'))
+
+
+                                        }}
+                                    >Remove from Cart</Button>
+                                }
+                            </div>
                         </div>
                     </div>
                 </DefaultModal>}

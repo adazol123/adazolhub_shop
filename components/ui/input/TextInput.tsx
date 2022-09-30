@@ -11,10 +11,11 @@ const TextInput = <T extends Partial<{
     autoFocus: boolean,
     autoComplete: string,
     required: boolean
+    shrink: 'shrink' | 'expand'
 
 }>>(props: T) => {
     return (
-        <label className={style._text__label}>
+        <label className={`${style._text__label} ${props.shrink == 'shrink' ? 'min-w-[10ch]' : 'w-full'}`}>
             <input
                 placeholder=' '
                 className={`${style._text__input} ${props.className}`}

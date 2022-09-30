@@ -70,7 +70,7 @@ h3 {
 }
 
 h4 {
-  @apply text-base font-semibold;
+  @apply text-base font-semibold tabular-nums;
 }
 h5 {
   @apply text-tiny font-semibold;
