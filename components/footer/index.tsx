@@ -20,7 +20,7 @@ const Footer = (props: Props) => {
             </div>
 
             <a href="" className='mx-auto font-thin opacity-75 w-fit'>
-                <span className='tracking-widest text-tiny'>Copyright 2022 © Adazolhub.com | All right reserved.</span>
+                <span className='tracking-widest text-tiny'>Adazolhub.com © 2022 | All right reserved.</span>
             </a>
         </div>
     )

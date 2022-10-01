@@ -40,7 +40,7 @@ const SideModal = (props: Props) => {
                         ].join(" ")}
                     >
                         {props.withHeader && <nav>
-                            <div className="inline-flex gap-2 items-center">
+                            <div className="inline-flex items-center gap-2">
                                 <button tabIndex={props.state ? 1 : -1} onClick={props.toggleStateHandler}>
                                     <ArrowLeftIcon />
                                 </button>
@@ -97,7 +97,7 @@ function Footer({ state }: { state: boolean }) {
         >
 
             <a href="http://adazolhub.com" target={"_blank"} rel={"noreferrer"}>
-                <span>Copyright 2022 © Adazolhub.com | All right reserved.</span>
+                <span>Adazolhub.com @ 2022 | All right reserved.</span>
                 <ArrowSmallRightIcon className="w-3 h-3 -rotate-45 stroke-gray-300 " />
             </a>
         </footer>

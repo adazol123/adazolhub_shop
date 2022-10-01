@@ -19,7 +19,7 @@ const ProductGridList = (props: Props) => {
     const { result, status } = useFetcher('shop', getProducts(), 'products')
     let [selectedItem, setSelectedItem] = useState<ProductItemProps>()
 
-
+    const router = useRouter()
     const dispatch = useAppDispatch()
     if (status === 'idle' || status === 'loading') {
         return <div>
@@ -48,10 +48,14 @@ const ProductGridList = (props: Props) => {
                     </div>
                     <ProductModal selectedItem={selectedItem} />
                 </div >
-                : <div className='grid place-content-center place-items-center min-h-[50vh] '>
-                    <h4>No Product found.</h4>
+                : <div className='grid place-content-center place-items-center min-h-[50vh]  gap-3'>
 
-                    <span className='max-w-[30ch] text-center mt-1 opacity-50'>Please check your internet connection or Contact the support.</span>
+                    <div className='grid place-content-center place-items-center'>
+                        <h4>No Product found.</h4>
+                        <span className='max-w-[32ch] text-center mt-1 opacity-50'>Please check your internet connection or contact the support.</span>
+                    </div>
+
+                    <Button styled='outline' onClick={() => router.reload()}>Reload</Button>
                 </div>
             }
         </Fragment>
