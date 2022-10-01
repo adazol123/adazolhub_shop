@@ -9,7 +9,7 @@ import SideModal from '../ui/modals/side'
 import { ProductItemProps } from './../../utils/type/types';
 
 type Props = {
-    product: ProductItemProps
+    product?: ProductItemProps
 }
 
 const HeaderNavProduct = (props: Props) => {
@@ -19,15 +19,17 @@ const HeaderNavProduct = (props: Props) => {
     const dispatch = useAppDispatch()
     return (
         <Fragment>
-            <header className='fixed w-full top-0 z-30 bg-transparent text-white'>
+            <header id='product-header' className='fixed top-0 z-30 w-full text-white bg-transparent'>
                 <div className='container flex items-center justify-between gap-10 px-6 mx-auto min-h-nav-height '>
-                    <div className='flex flex-col'>
-                        <p className='line-clamp-1'>{props.product.name}</p>
-                        <span className='opacity-50'>P {props.product.price}</span>
+                    <div>
+                        <div id='product-detail' className='flex flex-col'>
+                            <p className='line-clamp-1'>{props.product?.name}</p>
+                            <span className='opacity-50'>P {props.product?.price}</span>
+                        </div>
                     </div>
 
                     <div className='flex gap-2'>
-                        <button className='relative p-2  rounded-full bg-black/5'
+                        <button className='relative p-2 rounded-full bg-black/5'
                             onClick={() => router.back()}
                         >
                             <XMarkIcon className='w-6 h-6' />
