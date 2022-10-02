@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@heroicons/react': ^2.0.11
+  '@juggle/resize-observer': ^3.4.0
   '@reduxjs/toolkit': ^1.8.5
   '@tailwindcss/line-clamp': ^0.4.2
   '@types/node': 18.7.16
@@ -17,12 +18,14 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   react-redux: ^8.0.2
+  react-use-measure: ^2.1.1
   redux: ^4.2.0
   tailwindcss: ^3.1.8
   typescript: 4.8.3
 
 dependencies:
   '@heroicons/react': 2.0.11_react@18.2.0
+  '@juggle/resize-observer': 3.4.0
   '@reduxjs/toolkit': 1.8.5_kkwg4cbsojnjnupd3btipussee
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.1.8
   firebase: 9.9.4
@@ -31,6 +34,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-redux: 8.0.2_rlv4q3lv3ye3du2t2nhu327l6i
+  react-use-measure: 2.1.1_biqbaboplfbrettd7655fr4n2y
   redux: 4.2.0
 
 devDependencies:
@@ -620,6 +624,10 @@ packages:
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@juggle/resize-observer/3.4.0:
+    resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
+    dev: false
 
   /@motionone/animation/10.14.0:
     resolution: {integrity: sha512-h+1sdyBP8vbxEBW5gPFDnj+m2DCqdlAuf2g6Iafb1lcMnqjsRXWlPw1AXgvUMXmreyhqmPbJqoNfIKdytampRQ==}
@@ -1256,6 +1264,10 @@ packages:
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
     dev: true
+
+  /debounce/1.2.1:
+    resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -2677,6 +2689,17 @@ packages:
       react-is: 18.2.0
       redux: 4.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
+
+  /react-use-measure/2.1.1_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-nocZhN26cproIiIduswYpV5y5lQpSQS1y/4KuvUCjSKmw7ZWIS/+g3aFnX3WdBkyuGUtTLif3UTqnLLhbDoQig==}
+    peerDependencies:
+      react: '>=16.13'
+      react-dom: '>=16.13'
+    dependencies:
+      debounce: 1.2.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react/18.2.0:
